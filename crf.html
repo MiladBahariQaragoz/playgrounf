@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditional Random Fields Visualizer</title>
+    <link rel="stylesheet" href="crf.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Sequence Labeling</p>
+          <h1>Conditional Random Fields</h1>
+          <p class="lead">
+            Explore how CRFs combine emission and transition scores to label a sequence. Adjust
+            weights to see the best path update live.
+          </p>
+        </div>
+        <div class="scorecard">
+          <div class="score-label">Best Path</div>
+          <div class="score-value" id="pathScore">0.00</div>
+          <div class="score-sub" id="pathLabel">-</div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel controls">
+          <h2>Controls</h2>
+          <div class="group">
+            <div class="group-title">Observations</div>
+            <div class="tokens" id="tokens"></div>
+            <button class="ghost" id="shuffle">Shuffle tokens</button>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Emission weights</div>
+            <label>
+              Strong observation cue
+              <input type="range" min="0" max="3" step="0.1" value="1.8" id="emission" />
+              <span id="emissionValue">1.8</span>
+            </label>
+            <label>
+              Neutral observation cue
+              <input type="range" min="0" max="2" step="0.1" value="0.6" id="neutral" />
+              <span id="neutralValue">0.6</span>
+            </label>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Transition weights</div>
+            <label>
+              Stay same label
+              <input type="range" min="-1" max="2" step="0.1" value="1.0" id="stay" />
+              <span id="stayValue">1.0</span>
+            </label>
+            <label>
+              Switch labels
+              <input type="range" min="-1" max="2" step="0.1" value="0.2" id="switch" />
+              <span id="switchValue">0.2</span>
+            </label>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Legend</div>
+            <div class="legend">
+              <div><span class="pill tag"></span> Label A</div>
+              <div><span class="pill tag alt"></span> Label B</div>
+              <div><span class="dot"></span> Observation</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel graph">
+          <div class="graph-head">
+            <h2>CRF Lattice</h2>
+            <div class="hint">Best path is highlighted across the lattice</div>
+          </div>
+          <div class="lattice" id="lattice"></div>
+        </section>
+
+        <section class="panel info">
+          <h2>Score breakdown</h2>
+          <div class="formula" id="formula"></div>
+          <div class="breakdown" id="breakdown"></div>
+          <p class="note">
+            Emission scores connect observations to labels. Transition scores encourage label
+            consistency along the sequence.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="crf.js"></script>
+  </body>
+</html>
