@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Forest Visualizer</title>
+    <link rel="stylesheet" href="randomforest.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Source+Code+Pro:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Ensemble Learning</p>
+          <h1>Random Forest</h1>
+          <p class="lead">
+            Click to add points, train multiple trees with bootstrapping and feature randomness,
+            then watch the forest vote on predictions.
+          </p>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <span>Trees</span>
+            <strong id="treeCount">5</strong>
+          </div>
+          <div class="metric">
+            <span>Accuracy</span>
+            <strong id="accuracy">0%</strong>
+          </div>
+          <div class="metric">
+            <span>Diversity</span>
+            <strong id="diversity">0.00</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel controls">
+          <h2>Controls</h2>
+          <div class="group">
+            <div class="group-title">Point class</div>
+            <div class="pill-row" id="classPicker">
+              <button class="pill active" data-class="red">Red</button>
+              <button class="pill" data-class="blue">Blue</button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Forest settings</div>
+            <label>
+              Number of trees
+              <input type="range" min="1" max="15" step="1" value="5" id="numTrees" />
+              <span id="numTreesValue">5</span>
+            </label>
+            <label>
+              Max tree depth
+              <input type="range" min="1" max="5" step="1" value="3" id="maxDepth" />
+              <span id="maxDepthValue">3</span>
+            </label>
+            <label>
+              Bootstrap ratio
+              <input type="range" min="0.3" max="1" step="0.05" value="0.7" id="bootstrap" />
+              <span id="bootstrapValue">0.70</span>
+            </label>
+            <label>
+              Feature randomness
+              <input type="range" min="0" max="1" step="0.1" value="0.5" id="randomness" />
+              <span id="randomnessValue">0.50</span>
+            </label>
+          </div>
+
+          <div class="group actions">
+            <button class="primary" id="train">Train forest</button>
+            <button class="ghost" id="predict">Show predictions</button>
+            <button class="ghost" id="clear">Clear data</button>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Legend</div>
+            <div class="legend">
+              <div><span class="circle red"></span> Red class</div>
+              <div><span class="circle blue"></span> Blue class</div>
+              <div><span class="box"></span> Tree region</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel main-canvas">
+          <div class="canvas-head">
+            <h2>Decision Space</h2>
+            <div class="hint">Click to place points • Each tree sees different bootstrap samples</div>
+          </div>
+          <canvas id="canvas" width="640" height="480"></canvas>
+          <div class="vote-bar" id="voteBar"></div>
+        </section>
+
+        <section class="panel trees">
+          <h2>Individual Trees</h2>
+          <div class="tree-grid" id="treeGrid"></div>
+          <p class="note">
+            Each tree trains on a random bootstrap sample and considers random feature subsets at
+            splits. The ensemble votes to make the final prediction.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="randomforest.js"></script>
+  </body>
+</html>

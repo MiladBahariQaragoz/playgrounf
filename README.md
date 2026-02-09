@@ -4,6 +4,7 @@
 - Turing Test Imitation Game: open [turing.html](turing.html)
 - Rosenblatt Perceptron: open [perceptron.html](perceptron.html)
 - Conditional Random Fields: open [crf.html](crf.html)
+- Random Forest: open [randomforest.html](randomforest.html)
 
 ## Local server
 
@@ -19,3 +20,4 @@ Then open:
 - http://localhost:8000/turing.html
 - http://localhost:8000/perceptron.html
 - http://localhost:8000/crf.html
+- http://localhost:8000/randomforest.html
