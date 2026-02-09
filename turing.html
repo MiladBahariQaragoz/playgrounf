@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turing Test Imitation Game</title>
+    <link rel="stylesheet" href="turing.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="frame">
+      <header class="top">
+        <div>
+          <p class="eyebrow">Imitation Game</p>
+          <h1>Turing Test Simulator</h1>
+          <p class="lead">
+            Ask the same question to two hidden participants. Adjust the settings to see how
+            the bot adapts and decide who is human.
+          </p>
+        </div>
+        <div class="scorecard">
+          <div class="score-label">Accuracy</div>
+          <div class="score-value" id="accuracy">0%</div>
+          <div class="score-sub" id="rounds">0 rounds</div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel settings">
+          <h2>Settings</h2>
+          <div class="setting-group">
+            <label class="setting">
+              Bot delay
+              <input type="range" min="0" max="2000" step="100" value="700" id="botDelay" />
+              <span id="botDelayValue">700 ms</span>
+            </label>
+            <label class="setting">
+              Human delay
+              <input type="range" min="0" max="2000" step="100" value="900" id="humanDelay" />
+              <span id="humanDelayValue">900 ms</span>
+            </label>
+            <label class="setting">
+              Bot mistake rate
+              <input type="range" min="0" max="0.6" step="0.05" value="0.2" id="botMistake" />
+              <span id="botMistakeValue">0.20</span>
+            </label>
+            <label class="setting">
+              Human hesitation
+              <input type="range" min="0" max="0.6" step="0.05" value="0.15" id="humanHesitation" />
+              <span id="humanHesitationValue">0.15</span>
+            </label>
+          </div>
+
+          <div class="setting-group">
+            <div class="group-title">Human style</div>
+            <div class="pill-row" id="humanStyle">
+              <button class="pill active" data-style="story">Storyteller</button>
+              <button class="pill" data-style="precise">Precise</button>
+              <button class="pill" data-style="playful">Playful</button>
+            </div>
+          </div>
+
+          <div class="setting-group">
+            <div class="group-title">Bot tone</div>
+            <div class="pill-row" id="botTone">
+              <button class="pill active" data-tone="formal">Formal</button>
+              <button class="pill" data-tone="chatty">Chatty</button>
+              <button class="pill" data-tone="defensive">Defensive</button>
+            </div>
+          </div>
+
+          <div class="setting-group actions">
+            <button class="primary" id="startRound">Start new round</button>
+            <button class="ghost" id="reveal">Reveal identities</button>
+          </div>
+        </section>
+
+        <section class="panel chat">
+          <div class="chat-head">
+            <h2>Interview</h2>
+            <div class="status" id="status">Round not started</div>
+          </div>
+          <div class="chat-body" id="chatBody">
+            <div class="lane" data-lane="A">
+              <div class="lane-title">Participant A</div>
+              <div class="messages" id="laneA"></div>
+            </div>
+            <div class="lane" data-lane="B">
+              <div class="lane-title">Participant B</div>
+              <div class="messages" id="laneB"></div>
+            </div>
+          </div>
+          <div class="composer">
+            <input
+              type="text"
+              id="question"
+              placeholder="Ask a question to both participants..."
+            />
+            <button id="sendQuestion">Send</button>
+          </div>
+        </section>
+
+        <section class="panel guess">
+          <h2>Your Guess</h2>
+          <p class="helper">
+            Decide which participant is human after a few turns. You can reveal to check.
+          </p>
+          <div class="guess-buttons">
+            <button class="guess-btn" data-guess="A">A is human</button>
+            <button class="guess-btn" data-guess="B">B is human</button>
+          </div>
+          <div class="result" id="result"></div>
+          <div class="note">
+            Tip: probe for personal details, humor, and consistency over time.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="turing.js"></script>
+  </body>
+</html>
