@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rosenblatt Perceptron Lab</title>
+    <link rel="stylesheet" href="perceptron.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Linear Separator</p>
+          <h1>Rosenblatt Perceptron</h1>
+          <p class="lead">
+            Click the canvas to add points, then train a classic perceptron and watch the decision
+            boundary evolve.
+          </p>
+        </div>
+        <div class="stats" id="stats">
+          <div class="stat">
+            <span>Epoch</span>
+            <strong id="epoch">0</strong>
+          </div>
+          <div class="stat">
+            <span>Accuracy</span>
+            <strong id="accuracy">0%</strong>
+          </div>
+          <div class="stat">
+            <span>Loss</span>
+            <strong id="loss">0.00</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel controls">
+          <h2>Controls</h2>
+          <div class="group">
+            <div class="group-title">Point class</div>
+            <div class="pill-row" id="classPicker">
+              <button class="pill active" data-class="1">Class +1</button>
+              <button class="pill" data-class="-1">Class -1</button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Training</div>
+            <label>
+              Learning rate
+              <input type="range" min="0.01" max="1" step="0.01" value="0.2" id="lr" />
+              <span id="lrValue">0.20</span>
+            </label>
+            <label>
+              Epochs per step
+              <input type="range" min="1" max="20" step="1" value="5" id="epochs" />
+              <span id="epochsValue">5</span>
+            </label>
+            <label>
+              Bias
+              <input type="range" min="-1" max="1" step="0.05" value="0" id="bias" />
+              <span id="biasValue">0.00</span>
+            </label>
+          </div>
+
+          <div class="group actions">
+            <button class="primary" id="train">Train step</button>
+            <button class="ghost" id="reset">Reset model</button>
+            <button class="ghost" id="clear">Clear points</button>
+          </div>
+
+          <div class="group">
+            <div class="group-title">Weights</div>
+            <div class="weights" id="weights"></div>
+          </div>
+        </section>
+
+        <section class="panel canvas-panel">
+          <div class="canvas-head">
+            <h2>Decision Space</h2>
+            <div class="hint">Click to add points • Shift-click toggles class</div>
+          </div>
+          <canvas id="plane" width="640" height="420"></canvas>
+          <div class="legend">
+            <div><span class="dot pos"></span> Class +1</div>
+            <div><span class="dot neg"></span> Class -1</div>
+            <div><span class="line"></span> Decision boundary</div>
+          </div>
+        </section>
+
+        <section class="panel info">
+          <h2>Perceptron rule</h2>
+          <div class="formula" id="formula"></div>
+          <p class="note">
+            The perceptron updates weights only when a point is misclassified. Try linearly
+            separable data and watch it converge.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="perceptron.js"></script>
+  </body>
+</html>
